@@ -5,109 +5,121 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy 1 Year, Zainab ❤️</title>
 <style>
-    /* Background gradient */
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-        background: linear-gradient(135deg, #ffd1dc, #f5c7f7, #c2e7ff);
-        overflow: hidden;
-    }
+/* Background gradient */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffd1dc, #f5c7f7, #c2e7ff);
+    overflow: hidden;
+}
 
-    h1 {
-        color: #d63384;
-        margin-top: 20px;
-    }
+/* Title */
+h1 {
+    color: #d63384;
+    margin-top: 20px;
+}
 
-    .container {
-        margin-top: 40px;
-    }
+/* Envelope */
+.envelope {
+    width: 180px;
+    margin: auto;
+    cursor: pointer;
+    transition: transform 0.6s ease;
+    transform-origin: top center;
+    position: relative;
+    z-index: 10;
+}
 
-    /* Envelope styling */
-    .envelope {
-        width: 180px;
-        margin: auto;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-        position: relative;
-        z-index: 10;
-    }
-    .envelope:hover { transform: scale(1.1); }
+.envelope.open {
+    transform: rotateX(-180deg);
+}
 
-    /* Letter */
-    .letter {
-        display: none;
-        background-color: rgba(255,255,255,0.95);
-        padding: 20px;
-        margin-top: 25px;
-        border-radius: 15px;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-        z-index: 10;
-        text-align: left;
-    }
+.envelope::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.05);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transform-origin: top center;
+    transition: transform 0.6s ease;
+}
 
-    /* Typewriter effect */
-    .typewriter p {
-        display: inline-block;
-        border-right: 2px solid #d63384;
-        white-space: pre-wrap;
-        overflow: hidden;
-        font-size: 16px;
-        line-height: 1.5;
-    }
+.envelope.open::before {
+    transform: rotateX(-180deg);
+}
 
-    /* Play Music button */
-    #playMusicBtn {
-        display: none;
-        margin-top: 20px;
-        padding: 12px 22px;
-        background-color: #d63384;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 18px;
-        transition: 0.3s ease;
-    }
-    #playMusicBtn:hover { background-color: #ad1668; }
+/* Letter */
+.letter {
+    display: none;
+    background-color: rgba(255,255,255,0.95);
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 10;
+    text-align: left;
+}
 
-    /* Floating hearts */
-    .heart {
-        position: fixed;
-        font-size: 12px;
-        opacity: 0.85;
-        pointer-events: none;
-        animation: floatHeart linear infinite;
-    }
-    @keyframes floatHeart {
-        0% { transform: translateY(0) scale(1); opacity: 0.8; }
-        100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
-    }
+/* Typewriter effect */
+.typewriter p {
+    display: inline-block;
+    border-right: 2px solid #d63384;
+    white-space: pre-wrap;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.5;
+}
 
-    /* Falling rose petals */
-    .petal {
-        position: fixed;
-        top: -10px;
-        font-size: 18px;
-        pointer-events: none;
-        animation: fallPetal linear infinite;
-    }
-    @keyframes fallPetal {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-    }
+/* Play Music button */
+#playMusicBtn {
+    display: none;
+    margin-top: 20px;
+    padding: 12px 22px;
+    background-color: #d63384;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+#playMusicBtn:hover { background-color: #ad1668; }
 
-    /* Closing envelope animation */
-    .envelope.closed {
-        transform: translateY(0) rotateX(90deg);
-        opacity: 0;
-        transition: all 1s ease;
-    }
+/* Floating hearts */
+.heart {
+    position: fixed;
+    font-size: 12px;
+    opacity: 0.85;
+    pointer-events: none;
+    animation: floatHeart linear infinite;
+}
+@keyframes floatHeart {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+}
+
+/* Falling rose petals */
+.petal {
+    position: fixed;
+    top: -10px;
+    font-size: 18px;
+    pointer-events: none;
+    animation: fallPetal linear infinite;
+}
+@keyframes fallPetal {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
 </style>
 </head>
 <body>
@@ -116,7 +128,7 @@
 <p>Tap the envelope to open your surprise!</p>
 
 <div class="container">
-    <!-- Use your local envelope image -->
+    <!-- Envelope image -->
     <img src="envelope.png" class="envelope" id="envelope" alt="Envelope">
 </div>
 
@@ -160,70 +172,68 @@ Ameen Ya Rabb. ✨
 </audio>
 
 <script>
-    const envelope = document.getElementById("envelope");
-    const letter = document.getElementById("letter");
-    const playMusicBtn = document.getElementById("playMusicBtn");
-    const bgMusic = document.getElementById("bgMusic");
-    const letterText = document.getElementById("letterText");
+const envelope = document.getElementById("envelope");
+const letter = document.getElementById("letter");
+const playMusicBtn = document.getElementById("playMusicBtn");
+const bgMusic = document.getElementById("bgMusic");
+const letterText = document.getElementById("letterText");
 
-    // Envelope click to open letter
-    envelope.addEventListener("click", () => {
-        letter.style.display = "block";
-        playMusicBtn.style.display = "inline-block";
-        envelope.classList.add("closed"); // close envelope
-        startTypewriter(letterText);
-    });
+// Envelope click to open letter
+envelope.addEventListener("click", () => {
+    envelope.classList.add("open");
+    letter.style.display = "block";
+    playMusicBtn.style.display = "inline-block";
+    startTypewriter(letterText);
+    setTimeout(()=>{ envelope.classList.remove("open"); }, 2000);
+});
 
-    // Typewriter effect
-    function startTypewriter(element) {
-        const text = element.innerText;
-        element.innerText = '';
-        let i = 0;
-        const speed = 40;
-        function type() {
-            if (i < text.length) {
-                element.innerText += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            }
+// Typewriter effect
+function startTypewriter(element) {
+    const text = element.innerText;
+    element.innerText = '';
+    let i = 0;
+    const speed = 40;
+    function type() {
+        if(i < text.length) {
+            element.innerText += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
         }
-        type();
     }
+    type();
+}
 
-    // Play Music button
-    playMusicBtn.addEventListener("click", () => {
-        bgMusic.volume = 0;
-        bgMusic.play();
-        let fade = setInterval(() => {
-            if (bgMusic.volume < 0.9) bgMusic.volume += 0.05;
-            else clearInterval(fade);
-        }, 200);
-        playMusicBtn.textContent = "🎵 Playing...";
-        playMusicBtn.disabled = true;
-    });
+// Play Music button
+playMusicBtn.addEventListener("click", () => {
+    bgMusic.volume = 0;
+    bgMusic.play();
+    let fade = setInterval(()=>{ if(bgMusic.volume<0.9) bgMusic.volume+=0.05; else clearInterval(fade); }, 200);
+    playMusicBtn.textContent = "🎵 Playing...";
+    playMusicBtn.disabled = true;
+});
 
-    // Floating hearts
-    for (let i = 0; i < 20; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerText = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = (12 + Math.random()*25) + 'px';
-        heart.style.animationDuration = (5 + Math.random()*5) + 's';
-        heart.style.animationDelay = (Math.random()*5) + 's';
-        document.body.appendChild(heart);
-    }
+// Floating hearts
+for(let i=0;i<20;i++){
+    const heart=document.createElement('div');
+    heart.className='heart';
+    heart.innerText='❤️';
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.fontSize=(12+Math.random()*25)+'px';
+    heart.style.animationDuration=(5+Math.random()*5)+'s';
+    heart.style.animationDelay=(Math.random()*5)+'s';
+    document.body.appendChild(heart);
+}
 
-    // Falling rose petals
-    for (let i = 0; i < 15; i++) {
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        petal.innerText = '🌹';
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = (6 + Math.random()*6) + 's';
-        petal.style.animationDelay = (Math.random()*5) + 's';
-        document.body.appendChild(petal);
-    }
+// Falling rose petals
+for(let i=0;i<15;i++){
+    const petal=document.createElement('div');
+    petal.className='petal';
+    petal.innerText='🌹';
+    petal.style.left=Math.random()*100+'vw';
+    petal.style.animationDuration=(6+Math.random()*6)+'s';
+    petal.style.animationDelay=(Math.random()*5)+'s';
+    document.body.appendChild(petal);
+}
 </script>
 </body>
 </html>
