@@ -61,6 +61,20 @@ h1 {
     line-height: 1.5;
 }
 
+/* Play Music fallback button */
+#forcePlayBtn {
+    display: none;
+    margin: 20px auto;
+    padding: 12px 22px;
+    font-size: 18px;
+    border-radius: 10px;
+    background: #d63384;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#forcePlayBtn:hover { background: #ad1668; }
+
 /* Floating hearts */
 .heart {
     position: fixed;
@@ -138,11 +152,15 @@ Ameen Ya Rabb. ✨
   Your browser does not support the audio element.
 </audio>
 
+<!-- Fallback play button -->
+<button id="forcePlayBtn">🎵 Play Music</button>
+
 <script>
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
 const letterText = document.getElementById("letterText");
 const bgMusic = document.getElementById("bgMusic");
+const forcePlayBtn = document.getElementById("forcePlayBtn");
 
 // Envelope click to open letter
 envelope.addEventListener("click", () => {
@@ -166,14 +184,27 @@ function startTypewriter(element) {
     type();
 }
 
-// Fade in music
+// Try autoplay music
 bgMusic.volume = 0;
-bgMusic.play().catch(()=>{});
-let fade = setInterval(()=>{
-    if(bgMusic.volume < 0.5){
-        bgMusic.volume += 0.05;
-    } else clearInterval(fade);
-}, 200);
+bgMusic.play().catch(() => {
+    forcePlayBtn.style.display = "inline-block";
+});
+
+// Fade in music if autoplay works
+bgMusic.addEventListener('play', () => {
+    let fade = setInterval(()=>{
+        if(bgMusic.volume < 0.5){
+            bgMusic.volume += 0.05;
+        } else clearInterval(fade);
+    }, 200);
+});
+
+// Fallback button for blocked autoplay
+forcePlayBtn.addEventListener('click', () => {
+    bgMusic.play().then(() => {
+        forcePlayBtn.style.display = "none";
+    }).catch(()=>{ alert("Tap again to allow music."); });
+});
 
 // Floating hearts
 for(let i=0;i<20;i++){
