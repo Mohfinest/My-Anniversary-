@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy 2 Years, Zainab ❤️</title>
+
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -11,20 +12,17 @@ body {
     padding: 20px;
     text-align: center;
     background: linear-gradient(135deg, #ffd1dc, #f5c7f7, #c2e7ff);
-    overflow-x: hidden;
+    overflow: hidden;
     transition: background 2s ease;
 }
+
 h1 { color: #d63384; }
+
 .envelope {
     font-size: 68px;
     cursor: pointer;
-    position: relative;
-    z-index: 1;
-    touch-action: manipulation;
-    user-select: none;
-    display: inline-block;
-    margin: 10px 0;
 }
+
 .letter {
     display: none;
     background: rgba(255,255,255,0.95);
@@ -34,14 +32,17 @@ h1 { color: #d63384; }
     max-width: 600px;
     max-height: 70vh;
     overflow-y: auto;
-    margin: 20px auto;
+    margin: auto;
     text-align: left;
 }
+
 .typewriter p {
     white-space: pre-wrap;
     font-size: 16px;
     line-height: 1.6;
 }
+
+/* Fade overlay */
 #endingOverlay {
     position: fixed;
     top: 0;
@@ -58,85 +59,105 @@ h1 { color: #d63384; }
     text-align: center;
     z-index: 999;
     transition: opacity 3s ease;
-    pointer-events: none;
-}
-#forcePlayBtn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background: #d63384;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    touch-action: manipulation;
 }
 </style>
 </head>
+
 <body>
+
 <h1>💖 Happy 2 Years, Zainab ❤️</h1>
 <p>Tap the envelope to open your heart message</p>
+
 <div class="envelope" id="envelope">✉️</div>
-<br>
-<button id="forcePlayBtn">🎵 Play Music</button>
+
 <div class="letter" id="letter">
 <img src="MTE.jpg" style="width:180px; border-radius:50%; display:block; margin:auto;">
+
 <h2>💌 My Sweet Zainab ❤️</h2>
+
 <div class="typewriter">
 <p id="letterText"></p>
 </div>
 </div>
+
 <div id="endingOverlay">Forever, with you 🤍</div>
+
 <audio id="bgMusic" loop>
   <source src="the_mountain-piano-483803.mp3" type="audio/mpeg">
 </audio>
+
+<button id="forcePlayBtn">🎵 Play Music</button>
+
 <script>
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
 const textElement = document.getElementById("letterText");
 const bgMusic = document.getElementById("bgMusic");
 const overlay = document.getElementById("endingOverlay");
-const forcePlayBtn = document.getElementById("forcePlayBtn");
 
 const message = `When I met you exactly one year ago, it felt like something deeper than chance.
 Like our souls had already known each other long before that moment.
+
 Even then, I could see that at our core, we shared the same values.
 But I was still carrying fears.
+
 We were both learning how to love again.
+
 And then came the real journey.
+
 We have had disagreements.
 We have had misunderstandings.
+
 But those moments were never signs to give up.
+
 They were signs that what we have is real.
+
 Because real love is revealed when things are hard...
+
 And still...
+
 we stayed.
+
 We chose each other.
+
 What we have is not perfect...
+
 It is intentional.
+
 And that means everything.
+
 I choose you...
+
 in the easy moments,
+
 and in the difficult ones too.
+
 I choose us,
+
 every single time.
+
 And no matter what comes,
+
 I will always fight for what we have.
+
 May Allah continue to bless our bond,
+
 Ameen 🤍`;
 
 let i = 0;
-let typing = false;
 
 function typeWriter() {
     if (i < message.length) {
         textElement.innerHTML += message.charAt(i);
+
         let speed = 35;
-        if (message.substring(i, i + 20).includes("I choose you")) speed = 120;
-        if (message.substring(i, i + 20).includes("we stayed")) speed = 100;
+        if (message.substring(i, i+20).includes("I choose you")) speed = 120;
+        if (message.substring(i, i+20).includes("we stayed")) speed = 100;
+
         i++;
         setTimeout(typeWriter, speed);
     } else {
+        // when message ends → trigger cinematic ending
         setTimeout(startEnding, 2000);
     }
 }
@@ -146,31 +167,20 @@ function startEnding() {
     overlay.style.opacity = "1";
 }
 
-function playMusic() {
-    bgMusic.volume = 0;
-    bgMusic.play().then(() => {
-        let fade = setInterval(() => {
-            if (bgMusic.volume < 0.35) {
-                bgMusic.volume = Math.min(bgMusic.volume + 0.02, 0.35);
-            } else {
-                clearInterval(fade);
-            }
-        }, 200);
-    }).catch(err => console.log("Music play failed:", err));
-}
-
-envelope.addEventListener("click", () => {
-    if (typing) return;
-    typing = true;
+envelope.onclick = () => {
     letter.style.display = "block";
-    letter.scrollIntoView({ behavior: "smooth" });
-    playMusic();
-    typeWriter();
-});
+    bgMusic.volume = 0;
+    bgMusic.play();
 
-forcePlayBtn.addEventListener("click", () => {
-    playMusic();
-});
+    let fade = setInterval(()=>{
+        if(bgMusic.volume < 0.35){
+            bgMusic.volume += 0.02;
+        } else clearInterval(fade);
+    }, 200);
+
+    typeWriter();
+};
 </script>
+
 </body>
 </html>
